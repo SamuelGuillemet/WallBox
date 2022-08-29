@@ -1,9 +1,10 @@
+const fs = require('fs');
 const fetch = require('node-fetch');
 require('dotenv').config();
 
 // Get the username from the .env file
-const Username = process.env.USERNAME;
-const Password = process.env.PASSWORD;
+const Username = process.env.USERNAMEWB || fs.readFileSync(`${__dirname}/../.env`).toString().split('\n')[0].split('=')[1];
+const Password = process.env.PASSWORDWB || fs.readFileSync(`${__dirname}/../.env`).toString().split('\n')[1].split('=')[1];
 
 const BaseUrl = 'https://api.wall-box.com/';
 /**
