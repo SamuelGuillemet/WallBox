@@ -5,9 +5,9 @@
   "main": "./scripts/main.js",
   "scripts": {
     "start": "node scripts/main.js",
-    "predocs": "cat ./docs/predocs.md > ./readme.md",
+    "predocs": "cat ./docs/predocs.md > ./README.md",
     "docs": "./node_modules/.bin/jsdoc2md ./scripts/* > ./docs/doc.md",
-    "postdocs": "cat ./docs/doc.md >> ./readme.md",
+    "postdocs": "cat ./docs/doc.md >> ./README.md",
     "prebuild": "npm run docs",
     "build": "./node_modules/.bin/nexe -t windows-x64-14.15.3 -o ./out/WallBox",
     "build-test": "./node_modules/.bin/nexe -t linux-x64-14.15.3 -o ./out/WallBox-test"

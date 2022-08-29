@@ -55,6 +55,44 @@ async function getAuthToken(baseUrl, method, callback) {
         });
 }
 
+/**
+ * The function below is used to generate the jwt Token for the API calls
+ * @param {String} baseUrl The endpoint of the API Request
+ * @param {String} method The method of the API Request
+ * @param {Function} callback The callback function to be called after the API call
+ * @param {Object} body={} The body of the API Request
+ * @returns {Promise} The promise of the API call
+ */
+async function fetchData(baseUrl, method, callback, body = {}) {
+    const url = new URL(baseUrl);
+    const params = {
+        method,
+        headers: {
+            Authorization: `Bearer ${jwtToken.value}`,
+            Accept: 'application/json',
+        },
+    };
+    if (method === 'POST' || method === 'PUT') {
+        params.body = JSON.stringify(body);
+        params.headers['Content-Type'] = 'application/json';
+    }
+
+    return fetch(url, params)
+        .then((response) => {
+            if (response.status == 401) {
+                throw new Error('Veuillez vérifier votre identifiant et votre mot de passe');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            callback(data);
+        })
+        .catch((error) => {
+            console.warn(`\n${error.message}\n`);
+            setTimeout(() => { }, 5000);
+        });
+}
+
 // eslint-disable-next-line no-extend-native, func-names
 String.prototype.replaceAll = function (search, replacement) {
     let target = this;
@@ -64,9 +102,19 @@ String.prototype.replaceAll = function (search, replacement) {
     return target;
 };
 
+/**
+ * A small fucntion to handle delay between API requests
+ * @param {Number} ms The number of milliseconds to wait
+ * @returns {Promise} The promise of the timeout
+ */
+// eslint-disable-next-line no-promise-executor-return
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
 module.exports = {
     getAuthToken,
     setJwtToken,
     BaseUrl,
     jwtToken,
+    fetchData,
+    delay,
 };
