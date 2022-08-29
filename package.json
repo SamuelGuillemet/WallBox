@@ -1,0 +1,14 @@
+{
+  "name": "wallbox",
+  "version": "1.0.0",
+  "description": "Automate the current vartiation with API",
+  "main": "scripts/main.js",
+  "scripts": {
+    "start": "node scripts/main.js"
+  },
+  "author": "Samuel Guillemet",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^3.2.10"
+  }
+}
