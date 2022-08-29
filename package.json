@@ -15,7 +15,8 @@
   "author": "Samuel Guillemet",
   "license": "ISC",
   "dependencies": {
-    "node-fetch": "^3.2.10"
+    "dotenv": "^16.0.1",
+    "node-fetch": "^2.6.7"
   },
   "repository": {
     "type": "git",
@@ -27,5 +28,6 @@
     "eslint-plugin-import": "^2.26.0",
     "jsdoc-to-markdown": "^7.1.1",
     "nexe": "^4.0.0-rc.1"
-  }
+  },
+  "type": "commonjs"
 }
