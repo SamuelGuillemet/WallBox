@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const endpoints = {
     v1: {
         sessions_filters: '/sessions/filters',
@@ -5,7 +6,7 @@ export const endpoints = {
         users_chargers_bulkAdd: '/users/chargers/bulk-add',
         updatePassword: '/password/update',
         users_data_userId: '/users/data/{userId}',
-        users_rekognition_masterImage: '/users/rekognition/master-image'
+        users_rekognition_masterImage: '/users/rekognition/master-image',
     },
     v2: {
         currencies: 'v2/currencies',
@@ -14,7 +15,7 @@ export const endpoints = {
         charger_chargerId: 'v2/charger/{chargerId}',
         charger_chargerId_group: 'v2/charger/{chargerId}/group',
         user_userId: 'v2/user/{userId}',
-        user_userId_assignGroup_groupId: 'v2/user/{userId}/assign-group/{groupId}'
+        user_userId_assignGroup_groupId: 'v2/user/{userId}/assign-group/{groupId}',
     },
     v3: {
         plans: 'v3/plans',
@@ -46,7 +47,7 @@ export const endpoints = {
         contracts_contractId: 'v3/contracts/{contractId}',
         users_contracts_contractId_active: 'v3/contracts/{contractId}/activate',
         contact_reportIssue: '/v3/contact/report-issue',
-        contact_reportIssue_topics: '/v3/contact/report-issue/topics'
+        contact_reportIssue_topics: '/v3/contact/report-issue/topics',
     },
 
     v4: {
@@ -77,7 +78,7 @@ export const endpoints = {
         subscriptions_summary: '/v4/subscriptions/summary/{groupUid}',
         get_locations: '/v4/spaces/{organizationUid}/locations',
         location: '/v4/locations/{locationUid}',
-        organizations: '/v4/organizations'
+        organizations: '/v4/organizations',
     },
 
     userApi: {
@@ -91,6 +92,6 @@ export const endpoints = {
         activateUser: '/users/activate',
         googleSignup: '/users/google',
         appleSignup: '/users/apple',
-        refreshToken: '/users/refresh-token'
-    }
-}
+        refreshToken: '/users/refresh-token',
+    },
+};
