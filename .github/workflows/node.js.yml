@@ -5,25 +5,21 @@ name: Node.js CI
 
 on:
   push:
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [14.15.3]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js 14.15.3
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 14.15.3
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with: 
+        commit_message: "Build package and generate documentation"
