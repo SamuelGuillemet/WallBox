@@ -39,6 +39,9 @@
 <dt><a href="#delay">delay(ms)</a> ⇒ <code>Promise</code></dt>
 <dd><p>A small fucntion to handle delay between API requests</p>
 </dd>
+<dt><a href="#logger">logger(message)</a></dt>
+<dd><p>This function add a message to the console and to the log file</p>
+</dd>
 </dl>
 
 <a name="energy"></a>
@@ -140,4 +143,15 @@ A small fucntion to handle delay between API requests
 | Param | Type | Description |
 | --- | --- | --- |
 | ms | <code>Number</code> | The number of milliseconds to wait |
+
+<a name="logger"></a>
+
+## logger(message)
+This function add a message to the console and to the log file
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| message | <code>String</code> | The message to be logged |
 
