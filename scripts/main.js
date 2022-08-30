@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
 const {
-    setJwtToken, getAuthToken, BaseUrl, jwtToken, fetchData, delay,
+    setJwtToken, getAuthToken, BaseUrl, jwtToken, fetchData, delay, logger,
 } = require('./utils');
 
 let maxChargingCurrent = 0;
@@ -18,7 +18,7 @@ async function auth() {
     await getAuthToken(`${BaseUrl}auth/token/user`, 'GET', (data) => {
         const expirationDate = new Date(data.ttl * 1000);
         setJwtToken(data.jwt, expirationDate);
-        console.warn(`\nToken expires on ${jwtToken.expiration.toString()}\n`);
+        logger(`\nToken expires on ${jwtToken.expiration.toString()}\n`);
     });
     // Step 2 : Setup the interval to refresh the token
     setInterval(auth, jwtToken.expiration - Date.now());
@@ -48,8 +48,8 @@ async function getLastSession() {
             green_energy: data.data[0].attributes.charging_green_energy,
             diff: data.data[0].attributes.charging_energy - data.data[0].attributes.charging_green_energy,
         });
-        console.warn(`Energy : ${data.data[0].attributes.charging_energy}`);
-        console.warn(`Green Energy : ${data.data[0].attributes.charging_green_energy}`);
+        logger(`Energy : ${data.data[0].attributes.charging_energy}`);
+        logger(`Green Energy : ${data.data[0].attributes.charging_green_energy}`);
     });
 }
 
@@ -59,7 +59,7 @@ async function getLastSession() {
  */
 async function setAmperage(value) {
     await fetchData(`${BaseUrl}v2/charger/342268`, 'PUT', (data) => {
-        console.warn(`Amperage : ${data.data.chargerData.maxChargingCurrent}`);
+        logger(`Amperage : ${data.data.chargerData.maxChargingCurrent}`);
     }, { maxChargingCurrent: value });
 }
 
@@ -79,7 +79,7 @@ async function main() {
     while (true) {
         // Step 3 : Get the status of the charger
         await fetchData(`${BaseUrl}chargers/config/342268`, 'GET', (data) => {
-            console.warn(`Courent actuel : ${data.max_charging_current}`);
+            logger(`Courent actuel : ${data.max_charging_current}`);
             setmaxChargingCurrent(data.max_charging_current);
         });
         // Step 4 : Get the last session
@@ -90,12 +90,12 @@ async function main() {
         }
         if (energy[1].energy !== energy[0].energy) {
             const energyDiff = Math.abs(energy[1].diff - energy[0].diff);
-            console.warn(`Energy diff : ${energyDiff}`);
+            logger(`Energy diff : ${energyDiff}`);
             if (energyDiff > 0.05) {
-                console.warn(`Consomation non verte, on diminue l\`amperage à ${maxChargingCurrent - 2}A`);
+                logger(`Consomation non verte, on diminue l\`amperage à ${maxChargingCurrent - 2}A`);
                 setAmperage(maxChargingCurrent - 2);
             } else {
-                console.warn(`Consommation non optimale, on augmente l\`amperage à ${maxChargingCurrent + 1}A`);
+                logger(`Consommation non optimale, on augmente l\`amperage à ${maxChargingCurrent + 1}A`);
                 setAmperage(maxChargingCurrent + 1);
             }
         }

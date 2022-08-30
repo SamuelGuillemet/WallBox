@@ -111,6 +111,16 @@ String.prototype.replaceAll = function (search, replacement) {
 // eslint-disable-next-line no-promise-executor-return
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
+/**
+ * This function add a message to the console and to the log file
+ * @param {String} message The message to be logged
+ */
+function logger(message) {
+    const log = message.replaceAll('\n', '');
+    console.warn(`${new Date().toLocaleString()} - ${message}`);
+    fs.appendFileSync(`${__dirname}/../logs.txt`, `${new Date().toLocaleString()} - ${log}\n`);
+}
+
 module.exports = {
     getAuthToken,
     setJwtToken,
@@ -118,4 +128,5 @@ module.exports = {
     jwtToken,
     fetchData,
     delay,
+    logger,
 };
