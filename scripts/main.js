@@ -59,7 +59,7 @@ async function getLastSession() {
  */
 async function setAmperage(value) {
     await fetchData(`${BaseUrl}v2/charger/342268`, 'PUT', (data) => {
-        console.warn(`Amperage : ${data.data.attributes.maxChargingCurrent}`);
+        console.warn(`Amperage : ${data.data.chargerData.maxChargingCurrent}`);
     }, { maxChargingCurrent: value });
 }
 
@@ -95,14 +95,13 @@ async function main() {
                 console.warn(`Consomation non verte, on diminue l\`amperage à ${maxChargingCurrent - 2}A`);
                 setAmperage(maxChargingCurrent - 2);
             } else {
-                console.warn(`Consomation verte, on augmente l\`amperage à ${maxChargingCurrent + 1}A`);
+                console.warn(`Consommation non optimale, on augmente l\`amperage à ${maxChargingCurrent + 1}A`);
                 setAmperage(maxChargingCurrent + 1);
             }
         }
         console.warn();
         // Step 6 : Wait 5 seconds
-        // eslint-disable-next-line no-promise-executor-return
-        await delay(5000);
+        await delay(10000);
     }
 }
 

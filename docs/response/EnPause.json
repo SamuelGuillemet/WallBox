@@ -1,0 +1,62 @@
+{
+    "data": {
+        "chargerData": {
+            "id": 342268,
+            "uid": "01FWZS7Z4JK6A84CT0DA6S4NJ7",
+            "serialNumber": "342268",
+            "name": "PulsarPlus SN 342268",
+            "group": 247765,
+            "groupUid": "a92825e2-98ef-4462-8054-66abb9e15028",
+            "chargerType": "PulsarPlus",
+            "softwareVersion": "5.11.14",
+            "status": 182,
+            "ocppConnectionStatus": 1,
+            "ocppReady": "ocpp_1.6j",
+            "stateOfCharge": null,
+            "maxChgCurrent": 7,
+            "maxAvailableCurrent": 32,
+            "maxChargingCurrent": 6,
+            "locked": 0,
+            "lastConnection": 1661888262,
+            "lastSync": {
+                "date": "2022-08-30 16:10:32.000000",
+                "timezone_type": 3,
+                "timezone": "UTC"
+            },
+            "midEnabled": 0,
+            "midMargin": 1,
+            "midMarginUnit": 1,
+            "midSerialNumber": "",
+            "midStatus": 0,
+            "wifiSignal": 50,
+            "connectionType": "wifi",
+            "chargerLoadName": "Private",
+            "chargerLoadId": 2,
+            "chargingType": "AC",
+            "connectorType": "Type 2\/Socket",
+            "protocolCommunication": "wifi",
+            "accessType": "guest",
+            "powerSharingStatus": 0,
+            "resume": {
+                "totalUsers": 1,
+                "totalSessions": 31,
+                "chargingTime": "158559",
+                "totalEnergy": "112021",
+                "totalMidEnergy": "0",
+                "energyUnit": "kWh"
+            }
+        },
+        "users": [
+            {
+                "id": 244172,
+                "avatar": null,
+                "name": "jn.guillemet",
+                "surname": "GUILLEMET ",
+                "email": "jn.guillemet@gmail.com",
+                "profile": "super-admin",
+                "assigned": true,
+                "createdByUser": false
+            }
+        ]
+    }
+}
