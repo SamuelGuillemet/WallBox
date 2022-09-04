@@ -24,6 +24,9 @@
 <dt><a href="#setAmperage">setAmperage(value)</a></dt>
 <dd><p>This function is used to set the amperage of the charger</p>
 </dd>
+<dt><a href="#switchOff">switchOff()</a></dt>
+<dd><p>This function is used to stop the charger</p>
+</dd>
 <dt><a href="#main">main()</a></dt>
 <dd><p>The function below is used to start the script</p>
 </dd>
@@ -34,7 +37,7 @@
 <dd><p>The function below is used to generate the jwt Token for the API calls</p>
 </dd>
 <dt><a href="#fetchData">fetchData(baseUrl, method, callback, body)</a> ⇒ <code>Promise</code></dt>
-<dd><p>The function below is used to generate the jwt Token for the API calls</p>
+<dd><p>The function below is used to make the API calls</p>
 </dd>
 <dt><a href="#delay">delay(ms)</a> ⇒ <code>Promise</code></dt>
 <dd><p>A small fucntion to handle delay between API requests</p>
@@ -85,6 +88,12 @@ This function is used to set the amperage of the charger
 | --- | --- | --- |
 | value | <code>Number</code> | The value of the amperage |
 
+<a name="switchOff"></a>
+
+## switchOff()
+This function is used to stop the charger
+
+**Kind**: global function  
 <a name="main"></a>
 
 ## main()
@@ -120,7 +129,7 @@ The function below is used to generate the jwt Token for the API calls
 <a name="fetchData"></a>
 
 ## fetchData(baseUrl, method, callback, body) ⇒ <code>Promise</code>
-The function below is used to generate the jwt Token for the API calls
+The function below is used to make the API calls
 
 **Kind**: global function  
 **Returns**: <code>Promise</code> - The promise of the API call  
