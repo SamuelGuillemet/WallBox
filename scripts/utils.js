@@ -57,7 +57,7 @@ async function getAuthToken(baseUrl, method, callback) {
 }
 
 /**
- * The function below is used to generate the jwt Token for the API calls
+ * The function below is used to make the API calls
  * @param {String} baseUrl The endpoint of the API Request
  * @param {String} method The method of the API Request
  * @param {Function} callback The callback function to be called after the API call

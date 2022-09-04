@@ -5,6 +5,8 @@ const {
 
 let maxChargingCurrent = 0;
 
+let stopcounter = 0;
+
 /**
  * Set the value of maxChargingCurrent by function
  */
@@ -46,7 +48,7 @@ async function getLastSession() {
             timestamp,
             energy: data.data[0].attributes.charging_energy,
             green_energy: data.data[0].attributes.charging_green_energy,
-            diff: data.data[0].attributes.charging_energy - data.data[0].attributes.charging_green_energy,
+            diff: (data.data[0].attributes.charging_energy - data.data[0].attributes.charging_green_energy).toFixed(3),
         });
         logger(`Energy : ${data.data[0].attributes.charging_energy}`);
         logger(`Green Energy : ${data.data[0].attributes.charging_green_energy}`);
@@ -58,9 +60,21 @@ async function getLastSession() {
  * @param {Number} value The value of the amperage
  */
 async function setAmperage(value) {
+    if (value < 6) {
+        stopcounter += 1;
+    } else {
+        stopcounter = 0;
+    }
     await fetchData(`${BaseUrl}v2/charger/342268`, 'PUT', (data) => {
         logger(`Amperage : ${data.data.chargerData.maxChargingCurrent}`);
-    }, { maxChargingCurrent: value });
+    }, { maxChargingCurrent: value < 6 ? 6 : value });
+}
+
+/**
+ * This function is used to stop the charger
+ */
+async function switchOff() {
+    await fetchData(`${BaseUrl}v3/chargers/342268/remote-action`, 'POST', () => { }, { action: 2 });
 }
 
 /**
@@ -77,6 +91,11 @@ async function main() {
     await delay(5000);
     // eslint-disable-next-line no-constant-condition
     while (true) {
+        if (stopcounter > 2) {
+            logger('There is not enough sun to charge the car');
+            await switchOff();
+            break;
+        }
         // Step 3 : Get the status of the charger
         await fetchData(`${BaseUrl}chargers/config/342268`, 'GET', (data) => {
             logger(`Courent actuel : ${data.max_charging_current}`);
@@ -89,10 +108,10 @@ async function main() {
             energy.shift();
         }
         if (energy[1].energy !== energy[0].energy) {
-            const energyDiff = Math.abs(energy[1].diff - energy[0].diff);
-            logger(`Energy diff : ${energyDiff}`);
-            if (energyDiff > 0.05) {
-                logger(`Consomation non verte, on diminue l\`amperage à ${maxChargingCurrent - 2}A`);
+            const delta = energy[1].diff - energy[0].diff;
+            logger(`Delta entre la difference ancienne et nouvelle : ${delta}`);
+            if (delta > 0.01) {
+                logger(`Consomation non verte, on diminue l\`amperage à ${maxChargingCurrent - 2 < 6 ? 6 : maxChargingCurrent - 2}A`);
                 setAmperage(maxChargingCurrent - 2);
             } else {
                 logger(`Consommation non optimale, on augmente l\`amperage à ${maxChargingCurrent + 1}A`);
@@ -100,8 +119,8 @@ async function main() {
             }
         }
         console.warn();
-        // Step 6 : Wait 5 seconds
-        await delay(10000);
+        // Step 6 : Wait 15 seconds
+        await delay(15000);
     }
 }
 
