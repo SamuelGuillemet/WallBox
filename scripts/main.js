@@ -108,11 +108,12 @@ async function main() {
             energy.shift();
         }
         if (energy[1].energy !== energy[0].energy) {
-            const delta = energy[1].diff - energy[0].diff;
+            const delta = (energy[1].diff - energy[0].diff).toFixed(2);
             logger(`Delta entre la difference ancienne et nouvelle : ${delta}`);
-            if (delta > 0.01) {
+            if (delta >= 0.011) {
                 logger(`Consomation non verte, on diminue l\`amperage à ${maxChargingCurrent - 2 < 6 ? 6 : maxChargingCurrent - 2}A`);
-                setAmperage(maxChargingCurrent - 2);
+                const deltaAmperage = Math.ceil(delta * 400);
+                setAmperage(maxChargingCurrent - deltaAmperage);
             } else {
                 logger(`Consommation non optimale, on augmente l\`amperage à ${maxChargingCurrent + 1}A`);
                 setAmperage(maxChargingCurrent + 1);
