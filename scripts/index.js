@@ -110,7 +110,7 @@ async function main2() {
     while (true) {
         let power = await getShellyPower();
         while (power > responsePuissance) {
-            await delay(10000);
+            await delay(5000);
             power = await getShellyPower();
             logger(`Attente de lancement de la charge : Power : ${power}`);
         }
