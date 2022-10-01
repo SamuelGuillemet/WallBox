@@ -9,11 +9,25 @@ TODO
 ---
 
 ## Documentation :
+## Members
+
+<dl>
+<dt><a href="#maxChargingCurrent">maxChargingCurrent</a></dt>
+<dd><p>Le courant max de charge du chargeur</p>
+</dd>
+<dt><a href="#responsePuissance">responsePuissance</a></dt>
+<dd><p>La puissance à partir de laquelle on veut charger</p>
+</dd>
+<dt><a href="#stopCounter">stopCounter</a></dt>
+<dd><p>Compteur utile pour arreter la charge</p>
+</dd>
+</dl>
+
 ## Constants
 
 <dl>
-<dt><a href="#energy">energy</a></dt>
-<dd><p>A simple array to store the energy values</p>
+<dt><a href="#seuilPuissance">seuilPuissance</a></dt>
+<dd><p>Le seuil de puissance pour pouvoir arreter la charge</p>
 </dd>
 <dt><a href="#jwtToken">jwtToken</a></dt>
 <dd><p>The JWT Token with it expiration date</p>
@@ -29,17 +43,23 @@ TODO
 <dt><a href="#auth">auth()</a></dt>
 <dd><p>The function below is used to authenticate the user and setup the refurbishment of the token</p>
 </dd>
-<dt><a href="#getLastSession">getLastSession()</a></dt>
-<dd><p>This function handle the retrieval of the last session</p>
-</dd>
 <dt><a href="#setAmperage">setAmperage(value)</a></dt>
 <dd><p>This function is used to set the amperage of the charger</p>
 </dd>
 <dt><a href="#switchOff">switchOff()</a></dt>
 <dd><p>This function is used to stop the charger</p>
 </dd>
-<dt><a href="#main">main()</a></dt>
+<dt><a href="#switchOn">switchOn()</a></dt>
+<dd><p>This function is used to start the charger</p>
+</dd>
+<dt><a href="#getShellyPower">getShellyPower()</a></dt>
+<dd><p>This function is used to get the power of the shelly</p>
+</dd>
+<dt><a href="#main1">main1()</a></dt>
 <dd><p>The function below is used to start the script</p>
+</dd>
+<dt><a href="#main2">main2()</a></dt>
+<dd><p>The function below is used to start the body of the script</p>
 </dd>
 <dt><a href="#setJwtToken">setJwtToken(token, expiration)</a></dt>
 <dd><p>The function below is used to modify the jwtToken object</p>
@@ -58,10 +78,28 @@ TODO
 </dd>
 </dl>
 
-<a name="energy"></a>
+<a name="maxChargingCurrent"></a>
 
-## energy
-A simple array to store the energy values
+## maxChargingCurrent
+Le courant max de charge du chargeur
+
+**Kind**: global variable  
+<a name="responsePuissance"></a>
+
+## responsePuissance
+La puissance à partir de laquelle on veut charger
+
+**Kind**: global variable  
+<a name="stopCounter"></a>
+
+## stopCounter
+Compteur utile pour arreter la charge
+
+**Kind**: global variable  
+<a name="seuilPuissance"></a>
+
+## seuilPuissance
+Le seuil de puissance pour pouvoir arreter la charge
 
 **Kind**: global constant  
 <a name="jwtToken"></a>
@@ -82,12 +120,6 @@ Set the value of maxChargingCurrent by function
 The function below is used to authenticate the user and setup the refurbishment of the token
 
 **Kind**: global function  
-<a name="getLastSession"></a>
-
-## getLastSession()
-This function handle the retrieval of the last session
-
-**Kind**: global function  
 <a name="setAmperage"></a>
 
 ## setAmperage(value)
@@ -105,10 +137,28 @@ This function is used to set the amperage of the charger
 This function is used to stop the charger
 
 **Kind**: global function  
-<a name="main"></a>
+<a name="switchOn"></a>
 
-## main()
+## switchOn()
+This function is used to start the charger
+
+**Kind**: global function  
+<a name="getShellyPower"></a>
+
+## getShellyPower()
+This function is used to get the power of the shelly
+
+**Kind**: global function  
+<a name="main1"></a>
+
+## main1()
 The function below is used to start the script
+
+**Kind**: global function  
+<a name="main2"></a>
+
+## main2()
+The function below is used to start the body of the script
 
 **Kind**: global function  
 <a name="setJwtToken"></a>

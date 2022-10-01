@@ -2,9 +2,9 @@
   "name": "wallbox",
   "version": "1.0.0",
   "description": "Automate the current vartiation with API",
-  "main": "./scripts/main.js",
+  "main": "./scripts/index.js",
   "scripts": {
-    "start": "node scripts/main.js",
+    "start": "node scripts/index.js",
     "predocs": "cat ./docs/predocs.md > ./README.md",
     "docs": "./node_modules/.bin/jsdoc2md ./scripts/* > ./docs/doc.md",
     "postdocs": "cat ./docs/doc.md >> ./README.md",
@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.1",
+    "inquirer": "^8.2.4",
     "node-fetch": "^2.6.7"
   },
   "repository": {
