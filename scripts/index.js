@@ -9,6 +9,8 @@ const { questionPuissance } = require('./input');
  */
 let maxChargingCurrent = 0;
 
+let status;
+
 /**
  * La puissance à partir de laquelle on veut charger
  */
@@ -31,6 +33,9 @@ const setmaxChargingCurrent = (value) => {
     maxChargingCurrent = value;
 };
 
+const setStatus = (value) => {
+    status = value;
+};
 /**
  * The function below is used to authenticate the user and setup the refurbishment of the token
  */
@@ -103,6 +108,10 @@ async function main1() {
     main2();
 }
 
+async function getStatus() {
+    await fetchData(`${BaseUrl}v2/charger/342268`, 'GET', (data) => setStatus(data.data.chargerData.status));
+}
+
 /**
  * The function below is used to start the body of the script
  */
@@ -110,13 +119,18 @@ async function main2() {
     while (true) {
         let power = await getShellyPower();
         while (power > responsePuissance) {
-            await delay(10000);
+            await delay(5000);
             power = await getShellyPower();
-            logger(`Attente de lancement de la charge : Power : ${power}`);
+            logger(`Attente de lancement de la charge, puissance : ${power}`);
         }
-        await switchOn();
+        await getStatus();
+        while (status !== 194) {
+            await switchOn();
+            await getStatus();
+            logger(`Impossible de lancer la charge, status : ${status}`);
+        }
+        logger('Lancement de la charge');
         setAmperage(6);
-        delay(10000);
         while (true) {
             power = await getShellyPower();
             logger(`Puissance du Shelly : ${power}`);
